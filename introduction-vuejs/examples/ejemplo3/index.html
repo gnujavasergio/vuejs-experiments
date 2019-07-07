@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Hola Mundo</title>
+</head>
+
+<body>
+    <div id="app">
+        <h1>{{ titulo | upperCase }}</h1>
+        <h2>{{ subtitulo | lowerCase }}</h2>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        let app = new Vue({
+            el: '#app',
+            data: {
+                titulo: 'GDG Sucre',
+                subtitulo: 'Bienvenido a GDG Sucre'                
+            },
+            filters: {
+                upperCase: function(str){
+                    return str.toUpperCase();
+                },
+                lowerCase: str => str.toLowerCase()
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Hola Mundo</title>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" name="name" id="" placeholder="ingresa tu nombre" v-model="name">
+        <p>Tu nombre en mayuscula es: {{ name | upperCase}}</p>
+        <form v-on:submit.prevent="submit" action="" method="get">
+            <h2>Cuales son tus cursos favoritos?</h2>
+
+            <input type="checkbox" v-model="cursos" id="vue" value="vue">
+            <label for="vue">Curso de Vue.js</label>
+
+            <input type="checkbox" v-model="cursos" id="react" value="react">
+            <label for="react">Curso de React.js</label>
+
+            <input type="checkbox" v-model="cursos" id="angular" value="angular">
+            <label for="angular">Curso de Angular</label>
+
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        let app = new Vue({
+            el: '#app',
+            data: {
+             name: '',
+             cursos: []
+            },
+            filters: {
+                upperCase: str => str.toUpperCase()
+            },
+            methods: {
+                submit: function(){
+                    console.log('Se ejecuta el metodo submit');                    
+                    console.log(this.cursos);                    
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

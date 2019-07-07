@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Hola Mundo</title>
+</head>
+
+<body>
+    <div id="app">
+        El contador esta en {{ contador }}
+        <!-- Primera forma-->
+        <button v-on:click="restar">-</button>
+        <button v-on:click="sumar">+</button>        
+
+        <!-- Segunda forma-->
+        <button @click="restar">-</button>
+        <button @click="sumar">+</button>  
+
+        <!-- Tercera forma-->
+        <button @click="contador--">-</button>
+        <button @click="contador++">+</button>  
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        let app = new Vue({
+            el: '#app',
+            data: {
+             contador: 0
+            },
+            methods: {
+                sumar: function() {
+                    this.contador++;
+                },
+                restar: function() {
+                    this.contador--;
+                    if(this.contador < 0){
+                        this.contador = 0;
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
