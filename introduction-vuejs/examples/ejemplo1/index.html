@@ -1,29 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Hola Mundo</title>
-    
+
 </head>
+
 <body>
     <div id="app">
         Hola {{ name }}
         <a v-bind:href="url" target="_blank" rel="noopener noreferrer">Ir a {{ page }}</a>
         <a :href="url" target="_blank" rel="noopener noreferrer">Ir a {{ page }}</a>
+        {{ info }}
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.1/axios.js"></script>
     <script>
         let app = new Vue({
             el: '#app',
             data: {
                 name: 'Sergio',
                 url: 'https://google.com',
-                page: 'Google'
+                page: 'Google',
+                info: null
+            },
+            mounted() {
+                //this.getTemplates();
+                this.login();
+            },
+            methods: {
+                getTemplates() {
+                    const headers = {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'Content-type': 'application/json',
+                        'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMGIwYWQyYjYxMGFkNGMwYjVkMGQwZTY0MDA4Y2Y1Y2JmODA2Njk2MGI4ZDNkY2EzNDc5NzkxYzAzZGIyZDc1MWFjYzI3NGM5MjcyNmUyMzAiLCJpYXQiOjE1NzkzMDIxOTMsIm5iZiI6MTU3OTMwMjE5MywiZXhwIjoxNjEwOTI0NTkzLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.yaV5mXIXYsjgEYvJAqwz2CeBskznez-bdVCQapPQHZFFBePcul2pRnPG1yPwZ7aHOGO6VTUjjZUZIsfIJs7Pnxf92HwmdPoIsOZuCYqhhwWMiMYBRwdSjXE-SncCNqhKQSnSoZgjpdl1onDxgYO-OI6bp1Yp0m9iMlXP5NQY4J0u1TaAdw__xsyhrxl5ZuGp_mqdX2yoeEQnWOVxGqrr0D-HAZ2-X0K-LZbg9djOw8mLIz_OqtpJA2bZrHBmWVNsoCQz6YvfsUC2KGGmxtkYQu4QSlkC-TPOxCjYobewqDIXa_81C_g-oe7zPxi1nLSvD_tvci8QpLn8wIonmCgvSkS1a6Pge7qNpRTjxVc2OVrnjJx3Ven84J5eDW4Dcw6-_SA-n58lBGcsuBDXMfiZklFQn927_2Vw1xnUmo-N8iKY2FjPbEKy9AfmlRGTA4DbcAXjoXYaV7L2jPHm7phhD5S9IoBPkCCmPRfQjRveoMcpbN1gV3lG8clE6sXAR-XesTzyNL-j-9U-h6wJpDqFnzqpDYKYYrwO6XD-EPI7ZBG2gU4ErC5u_f8R0DFxcE82VYhGRT1nIlun5nn7HaOGU5LcU08gTN-P7hcYpH4QfZ4RXo2Z1Vigy85yJbPBCFSLXNK9FZfEEbjQXH9G5Z5TVpUO8CSty2pR4MIboSGrWnc'
+                    };
+                    axios({
+                        method: 'get',
+                        url: 'http://localhost:8000/api/templates',
+                        headers: headers
+                    }).then(response => (this.info = response));
+                },
+                login() {
+                    const headers = {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'Content-type': 'application/json'                        
+                    };
+                    axios({
+                        method: 'post',
+                        url: 'http://localhost:8000/api/login',
+                        data: {
+                            "email": "gnu.java.sergio@gmail.com",
+                            "password": "javaes10puntos"
+                        },
+                        headers: headers
+                    }).then(response => (this.info = response));
+                }
             }
         });
     </script>
 </body>
+
 </html>
